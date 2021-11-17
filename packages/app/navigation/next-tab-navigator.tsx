@@ -6,7 +6,7 @@ import { NextNavigationProps } from './types'
 import { createNextTabNavigator } from './universal-tab-navigator'
 
 const HomeNavigator = dynamic(() => import('../pages/home'))
-const PlaylistsNavigator = dynamic(() => import('../pages/playlists'))
+// const PlaylistsNavigator = dynamic(() => import('../pages/playlists'))
 const ProfileNavigator = dynamic(() => import('../pages/profile'))
 
 const BottomTab = createNextTabNavigator()
@@ -41,13 +41,13 @@ export function NextTabNavigator({
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />
         }}
       />
-      <BottomTab.Screen
+      {/* <BottomTab.Screen
         name="playlistsTab"
         component={PlaylistsNavigator}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="disc" color={color} />
         }}
-      />
+      /> */}
       <BottomTab.Screen
         name="profileTab"
         component={ProfileNavigator}
