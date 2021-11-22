@@ -1,27 +1,48 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import dynamic from 'next/dynamic'
+
 import {
   StyleSheet,
   TouchableOpacity,
   KeyboardAvoidingView
 } from 'react-native'
 import { View, TextInput, Text } from 'dripsy'
-
-import { auth } from '../../../expo/firebase'
 import {
   createUserWithEmailAndPassword,
-  signInWithEmailAndPassword
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut
 } from 'firebase/auth'
 
-export default function SignLog() {
+import { auth } from '../../../expo/firebase'
+
+//import AuthStateChanged from './AuthStateChanged'
+
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { NavigationContainer } from '@react-navigation/native'
+const { Navigator, Screen } = createNativeStackNavigator()
+
+import { useRouter } from 'app/navigation/use-router'
+
+export default function SignLog({ navigation }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [user, setUser] = useState(null)
+
+  const router = useRouter()
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user)
+      }
+    })
+  }, [])
 
   const handleSignUp = () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user
-        console.log(user.email)
         // ...
       })
       .catch((error) => alert(error.message))
@@ -32,45 +53,81 @@ export default function SignLog() {
       .then((userCredential) => {
         const user = userCredential.user
         console.log(user.email)
+
+        router.push('/')
       })
       .catch((error) => alert(error.message))
   }
 
-  return (
-    <KeyboardAvoidingView style={styles.container}>
-      <View style={styles.loginCard}>
-        <TextInput
-          style={styles.input}
-          underlineColorAndroid="transparent"
-          placeholder="Email"
-          placeholderTextColor="#000"
-          autoCapitalize="none"
-          value={email}
-          onChangeText={(text) => setEmail(text)}
-        />
-        <TextInput
-          style={styles.input}
-          underlineColorAndroid="transparent"
-          placeholder="Password"
-          placeholderTextColor="#000"
-          autoCapitalize="none"
-          secureTextEntry={true}
-          value={password}
-          onChangeText={(text) => setPassword(text)}
-        />
-        {/* // Refactor to a seperate component */}
-        <View>
-          <TouchableOpacity style={styles.submitButton} onPress={handleLogin}>
-            <Text style={styles.submitButtonText}>Login</Text>
-          </TouchableOpacity>
+  const handleSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+        setUser(!user)
+        router.push('/')
+      })
+      .catch((error) => {
+        // An error happened.
+        alert(error.message)
+      })
+  }
 
-          <TouchableOpacity style={styles.submitButton} onPress={handleSignUp}>
-            <Text style={styles.submitButtonText}>Sign Up</Text>
-          </TouchableOpacity>
+  if (!user) {
+    return (
+      <KeyboardAvoidingView style={styles.container}>
+        <View style={styles.loginCard}>
+          <TextInput
+            style={styles.input}
+            underlineColorAndroid="transparent"
+            placeholder="Email"
+            placeholderTextColor="#000"
+            autoCapitalize="none"
+            value={email}
+            onChangeText={(text) => setEmail(text)}
+          />
+          <TextInput
+            style={styles.input}
+            underlineColorAndroid="transparent"
+            placeholder="Password"
+            placeholderTextColor="#000"
+            autoCapitalize="none"
+            secureTextEntry={true}
+            value={password}
+            onChangeText={(text) => setPassword(text)}
+          />
+          {/* // Refactor to a seperate component */}
+          <View>
+            <TouchableOpacity style={styles.submitButton} onPress={handleLogin}>
+              <Text style={styles.submitButtonText}>Login</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.submitButton}
+              onPress={handleSignUp}
+            >
+              <Text style={styles.submitButtonText}>Sign Up</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </KeyboardAvoidingView>
+    )
+  } else {
+    return (
+      <View style={styles.container}>
+        <View style={styles.loginCard}>
+          <Text style={{ margin: 10 }}>{`Hello ${user.email}`}</Text>
+          <View>
+            <TouchableOpacity
+              style={styles.submitButton}
+              onPress={handleSignOut}
+            >
+              <Text style={styles.submitButtonText}>log out</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
-    </KeyboardAvoidingView>
-  )
+    )
+  }
 }
 
 const styles = StyleSheet.create({
