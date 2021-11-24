@@ -52,7 +52,7 @@ export default function SignLog({ navigation }) {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user
-        console.log(user.email)
+        //console.log(user)
 
         router.push('/')
       })
@@ -71,6 +71,8 @@ export default function SignLog({ navigation }) {
         alert(error.message)
       })
   }
+
+console.log({user})
 
   if (!user) {
     return (

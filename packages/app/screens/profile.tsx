@@ -5,7 +5,7 @@ import { View } from 'dripsy'
 import SignLog from '../components/Profiles/SignLog'
 
 export default function ProfileScreen(props) {
-  console.log({props})
+  
 
   return (
     <View style={styles.container}>
