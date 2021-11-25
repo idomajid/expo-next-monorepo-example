@@ -4,7 +4,6 @@ import { View, Text, TextInput } from 'dripsy'
 import { USER } from '../../expo/data/dummy-data'
 
 //import { getDatabase, ref, set, get } from "firebase/database";
-import FormPost from '../components/FormPost'
 
 import Card from '../components/Card'
 
@@ -14,7 +13,7 @@ export default function HomeScreen(props) {
 
   return (
     <View style={styles.container}>
-      <FormPost/>
+      
       <View style={{ flex: 1 }}>
         <FlatList
           data={USER}
