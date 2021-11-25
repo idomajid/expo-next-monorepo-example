@@ -15,6 +15,10 @@ type ProfileStackParams = {
   profile: { user?: unknown }
 }
 
+type PostFormStackParams = {
+  formPost: undefined
+}
+
 type PlaylistsScreenProps = NativeStackScreenProps<
   PlaylistsStackParams,
   'playlists'
@@ -36,5 +40,6 @@ export type {
   NextNavigationProps,
   PlaylistsStackParams,
   HomeStackParams,
-  ProfileStackParams
+  ProfileStackParams,
+  PostFormStackParams
 }

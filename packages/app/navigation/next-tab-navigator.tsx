@@ -8,6 +8,7 @@ import { createNextTabNavigator } from './universal-tab-navigator'
 const HomeNavigator = dynamic(() => import('../pages/home'))
 // const PlaylistsNavigator = dynamic(() => import('../pages/playlists'))
 const ProfileNavigator = dynamic(() => import('../pages/profile'))
+const FormPostNavigator = dynamic(() => import('../pages/postForm'))
 
 const BottomTab = createNextTabNavigator()
 
@@ -41,6 +42,14 @@ export function NextTabNavigator({
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />
         }}
       />
+
+      <BottomTab.Screen
+    name='formPostTab'
+    component={FormPostNavigator}
+    options={{
+      tabBarIcon: ({ color }) => <TabBarIcon name="plus-circle" color={color} />
+    }}
+      />
       {/* <BottomTab.Screen
         name="playlistsTab"
         component={PlaylistsNavigator}
@@ -52,7 +61,7 @@ export function NextTabNavigator({
         name="profileTab"
         component={ProfileNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="smile" color={color} />
+          tabBarIcon: ({ color }) => <TabBarIcon name="user" color={color} />
         }}
       />
     </BottomTab.Navigator>

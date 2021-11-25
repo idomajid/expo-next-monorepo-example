@@ -4,7 +4,8 @@ import type { BottomTabNavigatorParams } from './bottom-tab-navigator/types'
 import {
   HomeStackParams,
   PlaylistsStackParams,
-  ProfileStackParams
+  ProfileStackParams,
+  PostFormStackParams,
 } from './types'
 
 type Props = React.ComponentProps<typeof NavigationContainer>['linking']
@@ -33,6 +34,12 @@ function makeHomeStackPath<Path extends keyof HomeStackParams>(
   return path
 }
 
+function makePostFormStackParams<Path extends keyof PostFormStackParams>(
+  path: Path
+): Path {
+  return path
+}
+
 function makeType<T>(t: T) {
   return t
 }
@@ -51,10 +58,15 @@ const homeStackPaths = makeType({
   home: makeHomeStackPath('home')
 })
 
+const postFormStackPaths = makeType({
+  formPost: makePostFormStackParams('formPost')
+})
+
 const tabPaths = makeType({
   home: makeTabPath('homeTab'),
   playlists: makeTabPath('playlistsTab'),
-  profile: makeTabPath('profileTab')
+  profile: makeTabPath('profileTab'),
+  formPost: makeTabPath('formPostTab'),
 })
 
 const linking: Props = {
@@ -68,13 +80,20 @@ const linking: Props = {
           [homeStackPaths.home]: ''
         }
       },
-      [tabPaths.playlists]: {
-        initialRouteName: playlistsStackPaths.playlists,
-        path: 'playlists',
+      // [tabPaths.playlists]: {
+      //   initialRouteName: playlistsStackPaths.playlists,
+      //   path: 'playlists',
+      //   screens: {
+      //     [playlistsStackPaths.playlists]: '',
+      //     [playlistsStackPaths.playlist]: ':id',
+      //     [playlistsStackPaths.new]: 'new'
+      //   }
+      // },
+      [tabPaths.formPost]: {
+        path: 'formPost',
+        initialRouteName: postFormStackPaths.formPost,
         screens: {
-          [playlistsStackPaths.playlists]: '',
-          [playlistsStackPaths.playlist]: ':id',
-          [playlistsStackPaths.new]: 'new'
+          [postFormStackPaths.formPost]: ''
         }
       },
       [tabPaths.profile]: {
