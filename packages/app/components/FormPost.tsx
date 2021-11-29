@@ -5,29 +5,40 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
+  KeyboardAvoidingView,
   ActivityIndicator
 } from 'react-native'
 import { v4 as uuidv4 } from 'uuid'
 import { ref, set } from 'firebase/database'
+
 import { db } from '../../expo/firebase'
+import { formattedDate } from '../utils/Date'
 
 export default function FormPost(props) {
   const [myName, setMyName] = useState('')
   const [myQuote, setMyQuoute] = useState('')
+  const [myAvatar, setMyAvatar] = useState('')
 
   const uuid = uuidv4()
   const insertData = () => {
-    set(ref(db, 'items/' + uuid), {
+    set(ref(db, `items/${uuid}`), {
+      uuid: uuid,
       name: myName,
+      date: formattedDate,
+      avatarUrl: myAvatar,
       quote: myQuote
     })
+      .then(() => {
+        console.log('data store Successful')
+      })
+      .catch((error) => error.message)
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.card}>
+    <KeyboardAvoidingView style={styles.container}>
+      <View style={styles.loginCard}>
         <TextInput
-          style={styles.input}
+          style={styles.inputOne}
           underlineColorAndroid="transparent"
           placeholder="Name"
           placeholderTextColor="#000"
@@ -36,9 +47,19 @@ export default function FormPost(props) {
             setMyName(text)
           }}
         />
+        <TextInput
+          style={styles.inputOne}
+          underlineColorAndroid="transparent"
+          placeholder="Avatar"
+          placeholderTextColor="#000"
+          value={myAvatar}
+          onChangeText={(text) => {
+            setMyAvatar(text)
+          }}
+        />
 
         <TextInput
-          style={styles.input}
+          style={styles.inputTwo}
           underlineColorAndroid="transparent"
           placeholder="Quotes"
           placeholderTextColor="#000"
@@ -49,43 +70,55 @@ export default function FormPost(props) {
             setMyQuoute(text)
           }}
         />
+
+        {/* // Refactor to a seperate component */}
         <View>
           <TouchableOpacity style={styles.submitButton} onPress={insertData}>
             <Text style={styles.submitButtonText}>Submit</Text>
           </TouchableOpacity>
         </View>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   )
 }
 
 const styles = StyleSheet.create({
-  input: {
-    margin: 7,
-    height: 40,
-    borderBottomColor: 'grey',
-    borderBottomWidth: 1,
-
-    width: 200
-  },
-  card: {
-    backgroundColor: '#FFC470',
-    width: '75%',
-    marginVertical: 10,
-    paddingVertical: 15,
-    paddingHorizontal: 20,
-    borderRadius: 10
-  },
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'salmon'
+    alignItems: 'center'
+  },
+  loginCard: {
+    backgroundColor: '#F8F5FA',
+
+    width: '100%',
+    height: '80%',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 0.2,
+    elevation: 5,
+    borderRadius: 8
+  },
+  inputOne: {
+    margin: 20,
+    marginHorizontal: 10,
+    borderBottomColor: 'grey',
+    borderBottomWidth: 1,
+    width: '95%',
+    height: '5%'
+  },
+  inputTwo: {
+    marginHorizontal: 10,
+    margin: 20,
+    borderBottomColor: 'grey',
+    borderBottomWidth: 1,
+    width: '95%',
+    height: '70%'
   },
   submitButton: {
-    backgroundColor: '#428ACA',
+    backgroundColor: '#FFC470',
     padding: 10,
-    paddingHorizontal: 40,
     margin: 5,
     height: 40,
     borderRadius: 9,
@@ -93,8 +126,7 @@ const styles = StyleSheet.create({
     borderColor: '#ffff'
   },
   submitButtonText: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    color: 'white'
+    color: 'black',
+    marginHorizontal: 150
   }
 })
