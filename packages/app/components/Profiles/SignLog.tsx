@@ -72,7 +72,7 @@ export default function SignLog({ navigation }) {
       })
   }
 
-console.log({user})
+
 
   if (!user) {
     return (
