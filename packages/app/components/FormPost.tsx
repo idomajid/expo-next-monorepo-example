@@ -11,8 +11,10 @@ import {
 import { v4 as uuidv4 } from 'uuid'
 import { ref, set } from 'firebase/database'
 
-import { db } from '../../expo/firebase'
+import { db,auth } from '../../expo/firebase'
 import { formattedDate } from '../utils/Date'
+import { useRouter } from 'app/navigation/use-router'
+
 
 export default function FormPost(props) {
   const [myName, setMyName] = useState('')
@@ -20,19 +22,30 @@ export default function FormPost(props) {
   const [myAvatar, setMyAvatar] = useState('')
 
   const uuid = uuidv4()
+  const router = useRouter()
+  
+const user = auth.currentUser
+
+
+
+
+
   const insertData = () => {
     set(ref(db, `items/${uuid}`), {
       uuid: uuid,
+      userId: user.uid,
       name: myName,
       date: formattedDate,
       avatarUrl: myAvatar,
       quote: myQuote
     })
       .then(() => {
-        console.log('data store Successful')
+        router.push('/')
       })
       .catch((error) => error.message)
   }
+
+  
 
   return (
     <KeyboardAvoidingView style={styles.container}>
