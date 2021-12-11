@@ -17,27 +17,24 @@ import { useRouter } from 'app/navigation/use-router'
 
 
 export default function FormPost(props) {
-  const [myName, setMyName] = useState('')
-  const [myQuote, setMyQuoute] = useState('')
+  const [mytitle, setMyTitle] = useState('')
+  const [myArticle, setMyArticle] = useState('')
   const [myAvatar, setMyAvatar] = useState('')
+  const [picture, setPicture] = useState('')
 
   const uuid = uuidv4()
   const router = useRouter()
   
 const user = auth.currentUser
 
-
-
-
-
   const insertData = () => {
     set(ref(db, `items/${uuid}`), {
       uuid: uuid,
       userId: user.uid,
-      name: myName,
+      title: mytitle,
       date: formattedDate,
       avatarUrl: myAvatar,
-      quote: myQuote
+      quote: myArticle
     })
       .then(() => {
         router.push('/')
@@ -55,9 +52,9 @@ const user = auth.currentUser
           underlineColorAndroid="transparent"
           placeholder="Name"
           placeholderTextColor="#000"
-          value={myName}
+          value={mytitle}
           onChangeText={(text) => {
-            setMyName(text)
+            setMyTitle(text)
           }}
         />
         <TextInput
@@ -78,9 +75,9 @@ const user = auth.currentUser
           placeholderTextColor="#000"
           multiline={true}
           numberOfLines={4}
-          value={myQuote}
+          value={myArticle}
           onChangeText={(text) => {
-            setMyQuoute(text)
+            setMyArticle(text)
           }}
         />
 
@@ -103,7 +100,6 @@ const styles = StyleSheet.create({
   },
   loginCard: {
     backgroundColor: '#F8F5FA',
-
     width: '100%',
     height: '80%',
     shadowColor: '#000',

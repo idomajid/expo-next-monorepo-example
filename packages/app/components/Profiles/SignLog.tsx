@@ -43,6 +43,7 @@ export default function SignLog({ navigation }) {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user
+        //console.log({user})
         // ...
       })
       .catch((error) => alert(error.message))
@@ -72,7 +73,7 @@ export default function SignLog({ navigation }) {
       })
   }
 
-
+  
 
   if (!user) {
     return (
