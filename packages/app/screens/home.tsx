@@ -1,16 +1,22 @@
 import React, { useState, useEffect } from 'react'
-import { FlatList, StyleSheet } from 'react-native'
+import { FlatList, StyleSheet, Pressable, Button } from 'react-native'
 import { View, Text, TextInput } from 'dripsy'
 import { USER } from '../../expo/data/dummy-data'
 import { ref, child, get } from 'firebase/database'
+import { useRouter } from 'app/navigation/use-router'
+
 
 //import { getDatabase, ref, set, get } from "firebase/database";
 
 import Card from '../components/Card'
 import { db } from '../../expo/firebase'
 
-export default function HomeScreen(props) {
+export default function 
+
+HomeScreen(props) {
   const [articleList, setArticleList] = useState([])
+
+  const router = useRouter()
 
   useEffect(() => {
     const dbRef = ref(db)
@@ -35,17 +41,28 @@ export default function HomeScreen(props) {
       <View style={{ flex: 1 }}>
         <FlatList
           data={articleList}
-          renderItem={({ item }) => (
+          renderItem={({item }) => (
+            <Pressable
+            key={item.uuid}
+          onPress={() => {
+            
+            router.push(`/article/${item.uuid}`)
+            //console.log(item.uuid)
+          }}
+            >
             <Card
-              name={item.name}
+              title={item.title}
               date={item.date}
               opinion={item.quote}
               image={item.avatarUrl}
             />
+            </Pressable>
           )}
           keyExtractor={(item) => item.uuid}
         />
       </View>
+      
+      
     </View>
   )
 }

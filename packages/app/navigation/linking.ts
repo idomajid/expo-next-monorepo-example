@@ -55,7 +55,8 @@ const profileStackPaths = makeType({
 })
 
 const homeStackPaths = makeType({
-  home: makeHomeStackPath('home')
+  home: makeHomeStackPath('home'),
+  article: makeHomeStackPath('article'),
 })
 
 const postFormStackPaths = makeType({
@@ -77,7 +78,9 @@ const linking: Props = {
         path: '',
         initialRouteName: homeStackPaths.home,
         screens: {
-          [homeStackPaths.home]: ''
+          [homeStackPaths.home]: '',
+          [homeStackPaths.home]: 'home',
+          [homeStackPaths.article]: 'article/:id',
         }
       },
       // [tabPaths.playlists]: {

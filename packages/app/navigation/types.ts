@@ -9,6 +9,8 @@ type PlaylistsStackParams = {
 
 type HomeStackParams = {
   home: undefined
+  article: { id: string }
+  
 }
 
 type ProfileStackParams = {
@@ -18,6 +20,12 @@ type ProfileStackParams = {
 type PostFormStackParams = {
   formPost: undefined
 }
+
+
+type HomeScreenProps = NativeStackScreenProps<
+HomeStackParams,
+  'article'
+>
 
 type PlaylistsScreenProps = NativeStackScreenProps<
   PlaylistsStackParams,
@@ -40,6 +48,7 @@ export type {
   NextNavigationProps,
   PlaylistsStackParams,
   HomeStackParams,
+  HomeScreenProps,
   ProfileStackParams,
   PostFormStackParams
 }
