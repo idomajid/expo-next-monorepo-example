@@ -2,23 +2,28 @@ import React from 'react'
 import { StyleSheet } from 'react-native'
 import { View, Text } from 'dripsy'
 
-import ProfPicture from './ProfPicture'
+import Picture from './Picture'
 
 export default function Card(props) {
   return (
     <View style={styles.container}>
       <View style={styles.cardCon}>
-        <View style={styles.directionStyle}>
-          <ProfPicture
-            style={styles.imageStyle}
-            source={{ uri: props.image }}
-          />
-          <View style={styles.nameDateContainer}>
-            <Text style={styles.nameStyle}>{props.name}</Text>
-            <Text style={styles.dateStyle}>{props.date}</Text>
-          </View>
+        <View>
+          <Text style={styles.title}>{props.title}</Text>
+          <Text style={styles.dateStyle}>{props.date}</Text>
         </View>
-        <Text style={styles.opinionStyle}>{props.opinion}</Text>
+        <View>
+          <Picture style={styles.cardPicture} source={{ uri: props.image }} />
+        </View>
+        <View style={styles.directionStyle}>
+          {/* <Picture
+            style={styles.profilePicStyle}
+            source={{ uri: props.image }}
+          /> */}
+          {/* <View style={styles.nameDateContainer}>
+            <Text style={styles.nameStyle}>{props.name}</Text>
+          </View> */}
+        </View>
       </View>
     </View>
   )
@@ -32,13 +37,13 @@ const styles = StyleSheet.create({
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.1,
-    shadowRadius: 1,  
+    shadowRadius: 1,
     elevation: 5
-
   },
   cardCon: {
     backgroundColor: '#FFC470',
     width: '85%',
+    height: 300,
     marginVertical: 10,
     paddingVertical: 15,
     paddingHorizontal: 20,
@@ -46,9 +51,10 @@ const styles = StyleSheet.create({
     flex: 1
   },
   nameStyle: {
-    fontSize: 17,
+    fontSize: 15,
     fontWeight: 'bold',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    paddingVertical: 5
   },
   dateStyle: {
     fontSize: 10,
@@ -60,15 +66,30 @@ const styles = StyleSheet.create({
     paddingVertical: 7,
     marginVertical: 10
   },
-  imageStyle: {
-    width: 50,
-    height: 50,
+  profilePicStyle: {
+    width: 30,
+    height: 30,
     borderRadius: 80
   },
   directionStyle: {
     flexDirection: 'row'
   },
   nameDateContainer: {
-    padding: 10
+    paddingHorizontal: 10
+  },
+  title: {
+    fontWeight: 'bold',
+    fontSize: 17
+  },
+  pictureLayout: {
+    width: '85%',
+    marginVertical: 10,
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    flex: 1
+  },
+  cardPicture: {
+    height: 200
   }
 })
