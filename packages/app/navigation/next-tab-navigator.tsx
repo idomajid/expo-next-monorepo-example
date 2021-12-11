@@ -6,7 +6,7 @@ import { NextNavigationProps } from './types'
 import { createNextTabNavigator } from './universal-tab-navigator'
 
 const HomeNavigator = dynamic(() => import('../pages/home'))
-// const PlaylistsNavigator = dynamic(() => import('../pages/playlists'))
+ //const PlaylistsNavigator = dynamic(() => import('../pages/playlists'))
 const ProfileNavigator = dynamic(() => import('../pages/profile'))
 const FormPostNavigator = dynamic(() => import('../pages/postForm'))
 
