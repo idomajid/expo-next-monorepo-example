@@ -18,7 +18,7 @@ function LinkTo() {
   useEffect(function trigger() {
     if (Platform.OS === 'web' && Router) {
       const handler = (path: string) => {
-        console.log({path})
+        //console.log({path})
         linkTo(path)
       }
       Router.events.on('routeChangeComplete', handler)
