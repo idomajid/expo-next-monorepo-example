@@ -8,46 +8,39 @@ import { db } from '../../expo/firebase'
 import type { HomeScreenProps } from 'app/navigation/types'
 import Article from '../components/ArticleCard'
 
+type Article = {
+  avatarUrl: string
+  date: string
+  quote: string
+  title: string
+  userId: string
+  uuid: string
+}
+
 export default function ArticleScreen({ navigation, route }: HomeScreenProps) {
-  const [articleList, setArticleList] = useState([])
+  const [article, setArticle] = useState<Article | null>()
 
   useEffect(() => {
     const dbRef = ref(db)
-    let articlesList = []
-    get(child(dbRef, `items/`))
+    const routeParams = route.params.id
+  get(child(dbRef, `items/${routeParams}`))
       .then((snapshot) => {
         if (snapshot.exists()) {
-          snapshot.forEach((snap) => {
-            articlesList.push(snap.val())
-          })
-
-          setArticleList(articlesList)
+          
+          setArticle(snapshot.val())
         } else {
-          console.log('No data available')
+          console.log("No data available");
         }
       })
       .catch((error) => error.message)
   }, [])
 
-  const ArticleData = () => {
-    const article = [...articleList]
-    const ids = article.map((id) => id.uuid)
-    //const idsPath = ids.map((slug) => ({ params: { pid: slug } }));
-    console.log(ids)
-  }
-
-  console.log(ArticleData())
+  if (article == null) return <Text>Loading</Text>
 
   return (
     <View style={styles.container}>
       <View>
-        <FlatList
-          data={articleList}
-          renderItem={({ item }) => (
-            <Article title={item.title} paragraph={item.quote} />
-          )}
-          keyExtractor={(item) => item.uuid}
-        />
+      <Article title={article.title} paragraph={article.quote}/>
       </View>
     </View>
   )
