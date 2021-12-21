@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
   View,
   Text,
@@ -8,40 +8,23 @@ import {
   KeyboardAvoidingView,
   ActivityIndicator
 } from 'react-native'
-import { v4 as uuidv4 } from 'uuid'
-import { ref, set } from 'firebase/database'
 
-import { db,auth } from '../../expo/firebase'
-import { formattedDate } from '../utils/Date'
-import { useRouter } from 'app/navigation/use-router'
 
 
 export default function FormPost(props) {
-  const [mytitle, setMyTitle] = useState('')
-  const [myArticle, setMyArticle] = useState('')
-  const [myAvatar, setMyAvatar] = useState('')
-  const [picture, setPicture] = useState('')
-
-  const uuid = uuidv4()
-  const router = useRouter()
   
-const user = auth.currentUser
 
-  const insertData = () => {
-    set(ref(db, `items/${uuid}`), {
-      uuid: uuid,
-      userId: user.uid,
-      title: mytitle,
-      date: formattedDate,
-      avatarUrl: myAvatar,
-      quote: myArticle
-    })
-      .then(() => {
-        router.push('/')
-      })
-      .catch((error) => error.message)
-  }
-
+  //  const updateData = () => {
+  //   update(ref(db, `items/${uuid}`), {
+  //     title: mytitle,
+  //     avatarUrl: myAvatar,
+  //     quote: myArticle
+  //   })
+  //     .then(() => {
+  //       router.push(`/formPost`)
+  //     })
+  //     .catch((error) => error.message)
+  // }
   
 
   return (
@@ -52,20 +35,16 @@ const user = auth.currentUser
           underlineColorAndroid="transparent"
           placeholder="Name"
           placeholderTextColor="#000"
-          value={mytitle}
-          onChangeText={(text) => {
-            setMyTitle(text)
-          }}
+          value={props.titleValue}
+          onChangeText={props.titleOnChange}
         />
         <TextInput
           style={styles.inputOne}
           underlineColorAndroid="transparent"
           placeholder="Avatar"
           placeholderTextColor="#000"
-          value={myAvatar}
-          onChangeText={(text) => {
-            setMyAvatar(text)
-          }}
+          value={props.avatarValue}
+          onChangeText={props.avatarOnChage}
         />
 
         <TextInput
@@ -75,16 +54,14 @@ const user = auth.currentUser
           placeholderTextColor="#000"
           multiline={true}
           numberOfLines={4}
-          value={myArticle}
-          onChangeText={(text) => {
-            setMyArticle(text)
-          }}
+          value={props.articleValue}
+          onChangeText={props.articleOnChange}
         />
 
         {/* // Refactor to a seperate component */}
         <View>
-          <TouchableOpacity style={styles.submitButton} onPress={insertData}>
-            <Text style={styles.submitButtonText}>Submit</Text>
+          <TouchableOpacity style={styles.submitButton} onPress={props.onInsertData}>
+            <Text style={styles.submitButtonText}>{props.titleButton}</Text>
           </TouchableOpacity>
         </View>
       </View>
