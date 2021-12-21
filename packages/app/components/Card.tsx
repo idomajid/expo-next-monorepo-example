@@ -1,10 +1,15 @@
-import React from 'react'
-import { StyleSheet } from 'react-native'
+import React ,{ useState } from 'react'
+import { StyleSheet, Button, Alert } from 'react-native'
 import { View, Text } from 'dripsy'
 
 import Picture from './Picture'
 
+
+
 export default function Card(props) {
+  
+
+  
   return (
     <View style={styles.container}>
       <View style={styles.cardCon}>
@@ -23,6 +28,22 @@ export default function Card(props) {
           {/* <View style={styles.nameDateContainer}>
             <Text style={styles.nameStyle}>{props.name}</Text>
           </View> */}
+        </View>
+        <View>
+          <View style={styles.ButtonEditStyle}>
+            <Button
+              title="Edit"
+              color="blue"
+              onPress={() => Alert.alert('Edit Button pressed')}
+            />
+          </View>
+          <View style={styles.ButtonRemoveStyle}>
+            <Button
+              title="Remove"
+              color="red"
+              onPress={() => Alert.alert('Remove Button pressed')}
+            />
+          </View>
         </View>
       </View>
     </View>
@@ -43,7 +64,7 @@ const styles = StyleSheet.create({
   cardCon: {
     backgroundColor: '#FFC470',
     width: '85%',
-    height: 300,
+    height: 350,
     marginVertical: 10,
     paddingVertical: 15,
     paddingHorizontal: 20,
@@ -91,5 +112,13 @@ const styles = StyleSheet.create({
   },
   cardPicture: {
     height: 200
+  },
+  ButtonEditStyle: {
+    padding: 1,
+    margin: 2
+  },
+  ButtonRemoveStyle: {
+    padding: 1,
+    margin: 2
   }
 })
