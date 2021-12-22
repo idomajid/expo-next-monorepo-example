@@ -3,7 +3,7 @@ import type { NavigationContainer } from '@react-navigation/native'
 import type { BottomTabNavigatorParams } from './bottom-tab-navigator/types'
 import {
   HomeStackParams,
-  PlaylistsStackParams,
+  //PlaylistsStackParams,
   ProfileStackParams,
   PostFormStackParams,
 } from './types'
@@ -57,6 +57,7 @@ const profileStackPaths = makeType({
 const homeStackPaths = makeType({
   home: makeHomeStackPath('home'),
   article: makeHomeStackPath('article'),
+  edit: makeHomeStackPath('edit')
 })
 
 const postFormStackPaths = makeType({
@@ -81,6 +82,7 @@ const linking: Props = {
           [homeStackPaths.home]: '',
           [homeStackPaths.home]: 'home',
           [homeStackPaths.article]: 'article/:id',
+          [homeStackPaths.edit]: ':uid/edit'
         }
       },
       // [tabPaths.playlists]: {

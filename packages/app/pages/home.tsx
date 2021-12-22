@@ -3,6 +3,7 @@ import React from 'react'
 import createStackNavigator from 'app/navigation/create-stack-navigator'
 import ArticleScreen from 'app/screens/article'
 import HomeScreen from 'app/screens/home'
+import EditScreen from 'app/screens/edit'
 import { HomeStackParams } from 'app/navigation/types'
 import { navigatorScreenOptions } from 'app/navigation/navigator-screen-options'
 
@@ -23,7 +24,9 @@ function HomeNavigator() {
         component={ArticleScreen}
         options={{ title: 'article', headerTitle: 'Article' }}
       />
-      
+      </HomeStack.Group>
+      <HomeStack.Group>
+        <HomeStack.Screen name="edit" component={EditScreen} />
       </HomeStack.Group>
     </HomeStack.Navigator>
   )

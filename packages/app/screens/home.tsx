@@ -45,7 +45,6 @@ HomeScreen(props) {
             <Pressable
             key={item.uuid}
           onPress={() => {
-            
             router.push(`/article/${item.uuid}`)
             //console.log(item.uuid)
           }}
@@ -55,6 +54,10 @@ HomeScreen(props) {
               date={item.date}
               opinion={item.quote}
               image={item.avatarUrl}
+              onEditPress={() => {
+                router.push(`/${item.uuid}/edit`)
+                
+              }}
             />
             </Pressable>
           )}

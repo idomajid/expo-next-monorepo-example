@@ -10,7 +10,7 @@ import type { NextComponentType, NextPageContext } from 'next'
 type HomeStackParams = {
   home: undefined
   article: { id: string }
-  
+  edit: undefined
 }
 
 type ProfileStackParams = {
@@ -25,6 +25,11 @@ type PostFormStackParams = {
 type HomeScreenProps = NativeStackScreenProps<
 HomeStackParams,
   'article'
+>
+
+type HomeScreenEditPostProps = NativeStackScreenProps<
+HomeStackParams,
+  'edit'
 >
 
 // type PlaylistsScreenProps = NativeStackScreenProps<
@@ -49,6 +54,7 @@ export type {
   // PlaylistsStackParams,
   HomeStackParams,
   HomeScreenProps,
+  HomeScreenEditPostProps,
   ProfileStackParams,
   PostFormStackParams
 }
