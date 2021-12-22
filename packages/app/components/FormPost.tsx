@@ -33,7 +33,7 @@ export default function FormPost(props) {
         <TextInput
           style={styles.inputOne}
           underlineColorAndroid="transparent"
-          placeholder="Name"
+          placeholder="title"
           placeholderTextColor="#000"
           value={props.titleValue}
           onChangeText={props.titleOnChange}
@@ -41,7 +41,7 @@ export default function FormPost(props) {
         <TextInput
           style={styles.inputOne}
           underlineColorAndroid="transparent"
-          placeholder="Avatar"
+          placeholder="cover"
           placeholderTextColor="#000"
           value={props.avatarValue}
           onChangeText={props.avatarOnChage}
@@ -50,7 +50,7 @@ export default function FormPost(props) {
         <TextInput
           style={styles.inputTwo}
           underlineColorAndroid="transparent"
-          placeholder="Quotes"
+          placeholder="Paragraph"
           placeholderTextColor="#000"
           multiline={true}
           numberOfLines={4}
