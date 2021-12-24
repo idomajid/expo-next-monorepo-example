@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native'
 import FormPost from '../components/FormPost'
 
 import { v4 as uuidv4 } from 'uuid'
-import { ref, set, update } from 'firebase/database'
+import { ref, set } from 'firebase/database'
 
 import { db, auth } from '../../expo/firebase'
 import { formattedDate } from '../utils/Date'
@@ -14,6 +14,8 @@ export default function postForm() {
   const [myArticle, setMyArticle] = useState('')
   const [myAvatar, setMyAvatar] = useState('')
   const [picture, setPicture] = useState('')
+
+  
 
   const uuid = uuidv4()
   const router = useRouter()
