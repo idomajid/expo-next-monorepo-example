@@ -1,12 +1,24 @@
 import React from 'react'
-import { View, StyleSheet, Text } from 'react-native'
+import { View, StyleSheet, Text, TouchableHighlight } from 'react-native'
+import Feather from '@expo/vector-icons/build/Feather'
 
 export default function ArticleCard(props) {
   return (
     <View style={styles.container}>
-      <View style={styles.loginCard}>
+      <View style={styles.layoutCard}>
         <View style={styles.textLayout}>
-          <Text style={styles.textTitle}>{props.title}</Text>
+          <View style={styles.rowSetting}>
+            <Text style={styles.textTitle}>{props.title}</Text>
+            <TouchableHighlight
+              activeOpacity={0.6}
+              underlayColor="#DDDDDD"
+              onPress={props.deleteArticleHandle}
+            >
+              <View>
+                <Feather name="trash-2" color="grey" size={21} />
+              </View>
+            </TouchableHighlight>
+          </View>
           <Text style={styles.textParagraph}>{props.paragraph}</Text>
         </View>
       </View>
@@ -27,14 +39,14 @@ const styles = StyleSheet.create({
   },
   textTitle: {
     fontWeight: 'bold',
-    fontSize: 18,
-    paddingVertical: 10
+    fontSize: 18
   },
   textParagraph: {
     fontSize: 14,
-    paddingVertical: 10
+    paddingVertical: 10,
+    marginHorizontal: 7
   },
-  loginCard: {
+  layoutCard: {
     backgroundColor: '#FBFEFB',
     width: '100%',
     shadowColor: '#000',
@@ -43,5 +55,11 @@ const styles = StyleSheet.create({
     shadowRadius: 0.2,
     elevation: 5,
     borderRadius: 8
+  },
+  rowSetting: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: 10,
+    marginHorizontal: 7
   }
 })
