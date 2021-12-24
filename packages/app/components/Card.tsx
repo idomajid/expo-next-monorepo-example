@@ -37,13 +37,6 @@ export default function Card(props) {
               onPress={props.onEditPress}
             />
           </View>
-          <View style={styles.ButtonRemoveStyle}>
-            <Button
-              title="Remove"
-              color="red"
-              onPress={() => Alert.alert('Remove Button pressed')}
-            />
-          </View>
         </View>
       </View>
     </View>
