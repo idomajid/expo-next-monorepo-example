@@ -36,15 +36,7 @@ export default function HomeScreen() {
       .catch((error) => error.message)
   }, [])
 
-  // const RemoveData = () => {
-  //   const uuid = myId.uuid
-  //   console.log(uuid)
-  //   remove(ref(db, `items/${uuid}`))
-  //     .then(() => {
-  //       Alert.alert('deleted')
-  //     })
-  //     .catch((error) => error.message)
-  // }
+  
 
   return (
     <View style={styles.container}>
