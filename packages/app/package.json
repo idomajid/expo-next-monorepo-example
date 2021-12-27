@@ -2,5 +2,8 @@
   "name": "app",
   "version": "1.0.0",
   "scripts": {},
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@react-native-community/async-storage": "^1.12.1"
+  }
 }
