@@ -1,5 +1,5 @@
-import React ,{ useState } from 'react'
-import { StyleSheet, Button, Alert } from 'react-native'
+import React from 'react'
+import { StyleSheet} from 'react-native'
 import { View, Text } from 'dripsy'
 
 import Picture from './Picture'
