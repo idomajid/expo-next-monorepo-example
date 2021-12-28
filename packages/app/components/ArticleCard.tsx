@@ -9,15 +9,29 @@ export default function ArticleCard(props) {
         <View style={styles.textLayout}>
           <View style={styles.rowSetting}>
             <Text style={styles.textTitle}>{props.title}</Text>
+            <View style={styles.rowButton}>
             <TouchableHighlight
-              activeOpacity={0.6}
-              underlayColor="#DDDDDD"
-              onPress={props.deleteArticleHandle}
-            >
-              <View>
-                <Feather name="trash-2" color="grey" size={21} />
-              </View>
-            </TouchableHighlight>
+            style={styles.editPad}
+                activeOpacity={0.6}
+                underlayColor="#DDDDDD"
+                onPress={props.editHandle}
+              >
+                <View>
+                  <Feather name="edit-2" color="grey" size={21} />
+                </View>
+              </TouchableHighlight>
+              <TouchableHighlight
+              style={styles.removePad}
+                activeOpacity={0.6}
+                underlayColor="#DDDDDD"
+                onPress={props.deleteArticleHandle}
+              >
+                <View>
+                  <Feather name="trash-2" color="grey" size={21} />
+                </View>
+              </TouchableHighlight>
+              
+            </View>
           </View>
           <Text style={styles.textParagraph}>{props.paragraph}</Text>
         </View>
@@ -61,5 +75,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingVertical: 10,
     marginHorizontal: 7
+  }, rowButton: {
+    flexDirection: 'row',
+    justifyContent: "space-evenly"
+  },editPad: {
+    paddingRight: 10
+  }, removePad: {
+    paddingLeft: 10
   }
 })
