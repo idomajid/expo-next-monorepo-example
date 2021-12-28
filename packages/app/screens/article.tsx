@@ -40,7 +40,7 @@ export default function ArticleScreen({ navigation, route }: HomeScreenProps) {
 
   
 
-  const RemoveData = () => {
+  const RemoveArt = () => {
     remove(ref(db, `items/${routeParams}`))
       .then(() => {
         Alert.alert('deleted')
@@ -49,12 +49,33 @@ export default function ArticleScreen({ navigation, route }: HomeScreenProps) {
       .catch((error) => error.message)
   }
 
+  const RemoveAlert = () => {
+    Alert.alert(
+      "Are You Sure ",
+      " Delete the article ?",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "OK", onPress: RemoveArt }
+      ]
+    );
+  } 
+
   if (article == null) return <Text>Loading</Text>
+
+  console.log(article.uuid)
+
+  const routerUuid = () => {
+    router.push(`/${article.uuid}/edit`)
+  }
 
   return (
     <View style={styles.container}>
       <View>
-      <Article title={article.title} paragraph={article.quote} deleteArticleHandle={RemoveData}/>
+      <Article title={article.title} paragraph={article.quote} deleteArticleHandle={RemoveAlert} editHandle={routerUuid}/>
       </View>
     </View>
   )
