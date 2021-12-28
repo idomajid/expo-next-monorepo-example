@@ -4,13 +4,15 @@ import dynamic from 'next/dynamic'
 import {
   StyleSheet,
   TouchableOpacity,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  ActivityIndicator
 } from 'react-native'
 import { View, TextInput, Text } from 'dripsy'
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
+  updateProfile,
   signOut
 } from 'firebase/auth'
 
@@ -27,6 +29,7 @@ import { useRouter } from 'app/navigation/use-router'
 export default function SignLog({ navigation }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [name, setName] = useState('')
   const [user, setUser] = useState(null)
 
   const router = useRouter()
@@ -41,9 +44,13 @@ export default function SignLog({ navigation }) {
   const handleSignUp = () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
+        updateProfile(auth.currentUser, {
+          displayName: name,
+        })
         // Signed in
         const user = userCredential.user
-        //console.log({user})
+
+        console.log({user})
         // ...
       })
       .catch((error) => alert(error.message))
@@ -53,8 +60,8 @@ export default function SignLog({ navigation }) {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user
-        //console.log(user)
-
+        
+        console.log({user})
         router.push('/')
       })
       .catch((error) => alert(error.message))
@@ -79,6 +86,15 @@ export default function SignLog({ navigation }) {
     return (
       <KeyboardAvoidingView style={styles.container}>
         <View style={styles.loginCard}>
+        <TextInput
+            style={styles.input}
+            underlineColorAndroid="transparent"
+            placeholder="Name"
+            placeholderTextColor="#000"
+            autoCapitalize="none"
+            value={name}
+            onChangeText={(text) => setName(text)}
+          />
           <TextInput
             style={styles.input}
             underlineColorAndroid="transparent"
