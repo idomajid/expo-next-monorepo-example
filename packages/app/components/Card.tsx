@@ -29,15 +29,7 @@ export default function Card(props) {
             <Text style={styles.nameStyle}>{props.name}</Text>
           </View> */}
         </View>
-        <View>
-          <View style={styles.ButtonEditStyle}>
-            <Button
-              title="Edit"
-              color="blue"
-              onPress={props.onEditPress}
-            />
-          </View>
-        </View>
+  
       </View>
     </View>
   )
@@ -57,7 +49,7 @@ const styles = StyleSheet.create({
   cardCon: {
     backgroundColor: '#FFC470',
     width: '85%',
-    height: 350,
+    height: 300,
     marginVertical: 10,
     paddingVertical: 15,
     paddingHorizontal: 20,
@@ -106,12 +98,5 @@ const styles = StyleSheet.create({
   cardPicture: {
     height: 200
   },
-  ButtonEditStyle: {
-    padding: 1,
-    margin: 2
-  },
-  ButtonRemoveStyle: {
-    padding: 1,
-    margin: 2
-  }
+  
 })
