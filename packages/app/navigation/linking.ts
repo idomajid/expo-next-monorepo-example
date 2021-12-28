@@ -82,7 +82,7 @@ const linking: Props = {
           [homeStackPaths.home]: '',
           [homeStackPaths.home]: 'home',
           [homeStackPaths.article]: 'article/:id',
-          [homeStackPaths.edit]: ':uid/edit'
+          [homeStackPaths.edit]: ':id/edit'
         }
       },
       // [tabPaths.playlists]: {

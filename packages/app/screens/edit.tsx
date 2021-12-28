@@ -14,11 +14,11 @@ export default function edit({ navigation, route }: HomeScreenProps) {
   const [myAvatar, setMyAvatar] = useState('')
   const [picture, setPicture] = useState('')
 
-  const uid = route.params.uid
+  const uid = route.params.id
   const router = useRouter()
   const user = auth.currentUser
 
-  
+  console.log(route)
 
   useEffect(() => {
     const dbRef = ref(db)
