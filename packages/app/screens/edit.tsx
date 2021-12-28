@@ -18,7 +18,7 @@ export default function edit({ navigation, route }: HomeScreenProps) {
   const router = useRouter()
   const user = auth.currentUser
 
-  console.log(route)
+  console.log(user)
 
   useEffect(() => {
     const dbRef = ref(db)
