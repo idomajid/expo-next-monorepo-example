@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Text, View } from 'dripsy'
-import { StyleSheet, Alert } from 'react-native'
+import { StyleSheet, Alert, ActivityIndicator } from 'react-native'
 
 import { ref, child, get, remove } from 'firebase/database'
 import { db } from '../../expo/firebase'
@@ -64,9 +64,8 @@ export default function ArticleScreen({ navigation, route }: HomeScreenProps) {
     );
   } 
 
-  if (article == null) return <Text>Loading</Text>
+  if (article == null) return <ActivityIndicator style={{flex: 1, justifyContent: "center", alignItems: "center"}}/>
 
-  console.log(article.uuid)
 
   const routerUuid = () => {
     router.push(`/${article.uuid}/edit`)

@@ -6,26 +6,12 @@ import {
   StyleSheet,
   TouchableOpacity,
   KeyboardAvoidingView,
-  ActivityIndicator
+  
 } from 'react-native'
 
 
 
 export default function FormPost(props) {
-  
-
-  //  const updateData = () => {
-  //   update(ref(db, `items/${uuid}`), {
-  //     title: mytitle,
-  //     avatarUrl: myAvatar,
-  //     quote: myArticle
-  //   })
-  //     .then(() => {
-  //       router.push(`/formPost`)
-  //     })
-  //     .catch((error) => error.message)
-  // }
-  
 
   return (
     <KeyboardAvoidingView style={styles.container}>
@@ -58,7 +44,7 @@ export default function FormPost(props) {
           onChangeText={props.articleOnChange}
         />
 
-        {/* // Refactor to a seperate component */}
+        
         <View>
           <TouchableOpacity style={styles.submitButton} onPress={props.onInsertData}>
             <Text style={styles.submitButtonText}>{props.titleButton}</Text>
