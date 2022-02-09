@@ -45,12 +45,12 @@ export default function SignLog({ navigation }) {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         updateProfile(auth.currentUser, {
-          displayName: name,
+          displayName: name
         })
         // Signed in
         const user = userCredential.user
 
-        console.log({user})
+        console.log({ user })
         // ...
       })
       .catch((error) => alert(error.message))
@@ -60,8 +60,8 @@ export default function SignLog({ navigation }) {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user
-        
-        console.log({user})
+
+        console.log({ user })
         router.push('/')
       })
       .catch((error) => alert(error.message))
@@ -80,55 +80,76 @@ export default function SignLog({ navigation }) {
       })
   }
 
-  
-
   if (!user) {
     return (
-      <KeyboardAvoidingView style={styles.container}>
-        <View style={styles.loginCard}>
-        <TextInput
-            style={styles.input}
-            underlineColorAndroid="transparent"
-            placeholder="Name"
-            placeholderTextColor="#000"
-            autoCapitalize="none"
-            value={name}
-            onChangeText={(text) => setName(text)}
-          />
-          <TextInput
-            style={styles.input}
-            underlineColorAndroid="transparent"
-            placeholder="Email"
-            placeholderTextColor="#000"
-            autoCapitalize="none"
-            value={email}
-            onChangeText={(text) => setEmail(text)}
-          />
-          <TextInput
-            style={styles.input}
-            underlineColorAndroid="transparent"
-            placeholder="Password"
-            placeholderTextColor="#000"
-            autoCapitalize="none"
-            secureTextEntry={true}
-            value={password}
-            onChangeText={(text) => setPassword(text)}
-          />
-          {/* // Refactor to a seperate component */}
-          <View>
-            <TouchableOpacity style={styles.submitButton} onPress={handleLogin}>
-              <Text style={styles.submitButtonText}>Login</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={styles.submitButton}
-              onPress={handleSignUp}
-            >
-              <Text style={styles.submitButtonText}>Sign Up</Text>
-            </TouchableOpacity>
-          </View>
+      <View>
+        <View>
+          <Text style={styles.loginTitle}>Sign up</Text>
         </View>
-      </KeyboardAvoidingView>
+        {/* <View style={{ backgroundColor: 'black' }}>
+              <Text>dnwqdqlwkdqwlk</Text>
+            </View> */}
+        <KeyboardAvoidingView style={styles.container}>
+          <View style={styles.loginCard}>
+            <View style={styles.textInputContainer}>
+              <Text style={styles.textTittle}>Name</Text>
+              <TextInput
+                style={styles.input}
+                underlineColorAndroid="transparent"
+                placeholder="Types something here......"
+                placeholderTextColor="#000"
+                autoCapitalize="none"
+                value={name}
+                onChangeText={(text) => setName(text)}
+              />
+            </View>
+            <View style={styles.textInputContainer}>
+              <Text style={styles.textTittle}>Email</Text>
+              <TextInput
+                style={styles.input}
+                underlineColorAndroid="transparent"
+                placeholder="Types something here......"
+                placeholderTextColor="#000"
+                autoCapitalize="none"
+                value={email}
+                onChangeText={(text) => setEmail(text)}
+              />
+            </View>
+            <View style={styles.textInputContainer}>
+              <Text style={styles.textTittle}>Password</Text>
+              <TextInput
+                style={styles.input}
+                underlineColorAndroid="transparent"
+                placeholder="Types something here......"
+                placeholderTextColor="#000"
+                autoCapitalize="none"
+                secureTextEntry={true}
+                value={password}
+                onChangeText={(text) => setPassword(text)}
+              />
+            </View>
+            {/* // Refactor to a seperate component */}
+            <View>
+              {/* <TouchableOpacity style={styles.submitButton} onPress={handleLogin}>
+              <Text style={styles.submitButtonText}>Login</Text>
+            </TouchableOpacity> */}
+
+              <TouchableOpacity
+                style={styles.submitButton}
+                onPress={handleSignUp}
+              >
+                <Text style={styles.submitButtonText}>Sign Up</Text>
+              </TouchableOpacity>
+            </View>
+            <View>
+              <Text style={styles.haveAnAccount}>
+                Already have account ?{' '}
+                <Text style={{ color: '#4DB5FF' }}>Login</Text>
+              </Text>
+            </View>
+          </View>
+        </KeyboardAvoidingView>
+      </View>
     )
   } else {
     return (
@@ -151,42 +172,76 @@ export default function SignLog({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    position: 'absolute',
+    width: 375,
+    height: 282,
+    left: 0
+  },
+  textInputContainer: {
+    marginVertical: 2
+  },
+  textTittle: {
+    fontStyle: 'normal',
+    fontWeight: '600',
+    fontSize: 12,
+    lineHeight: 16
+  },
+  loginTitle: {
+    // width: 111,
+    // height: 41,
+    // left: 132,
+    marginHorizontal: 30,
+    fontStyle: 'normal',
+    fontWeight: '600',
+    fontSize: 30,
+    lineHeight: 41,
+    color: '#404040',
+    top: 100,
+    textAlign: 'center'
   },
   loginCard: {
-    backgroundColor: '#FFC470',
-    justifyContent: 'center',
+    flex: 1,
+    flexDirection: 'column',
     alignItems: 'center',
-    width: '75%',
-    height: '35%',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 0.2,
-    elevation: 5,
-    borderRadius: 8
+    paddingHorizontal: 30,
+    paddingVertical: 40,
+    top: 200
   },
   input: {
-    margin: 7,
+    margin: 5,
+    borderWidth: 1,
+    borderColor: '#BFBFBF',
+    borderRadius: 8,
+    paddingLeft: 16,
+    position: 'relative',
+    width: 315,
     height: 40,
-    borderBottomColor: 'grey',
-    borderBottomWidth: 1,
-
-    width: 200
+    left: -5
   },
   submitButton: {
-    backgroundColor: '#428ACA',
-    padding: 10,
-    paddingHorizontal: 40,
-    margin: 5,
-    height: 40,
-    borderRadius: 9,
-    borderWidth: 1,
-    borderColor: '#ffff'
+    left: -5,
+    width: 315,
+    height: 55,
+    marginVertical: 20,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    backgroundColor: '#4DB5FF',
+    borderRadius: 8,
+    paddingHorizontal: 12,
+    paddingVertical: 15
   },
   submitButtonText: {
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    fontSize: 18,
+    lineHeight: 25,
     color: 'white'
+  },
+  haveAnAccount: {
+    fontStyle: 'normal',
+    fontWeight: '600',
+    fontSize: 12,
+    lineHeight: 14,
+    textAlign: 'center'
   }
 })
